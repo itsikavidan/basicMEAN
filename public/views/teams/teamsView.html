@@ -1,0 +1,13 @@
+<h1>Rooms View</h1>
+
+<ul >
+    <li ng-repeat="room in vm.rooms">
+        <a ui-sref="teamP({teamCode:room.id})" >{{room.name}}</a>
+    </li>
+
+</ul>
+
+<input ng-model="vm.newRoomName">
+<button ng-click="vm.createNewRoom()">Create a new Room</button>
+
+<!--{{vm.rooms}}-->

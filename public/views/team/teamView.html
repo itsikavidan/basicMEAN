@@ -1,0 +1,17 @@
+<h1>Room View - {{vm.room.name}}</h1>
+
+
+<div>
+    <h4>messages  : </h4>
+    <ul ng-repeat="msg in vm.room.msgs">
+        <li>
+            <div><span> {{msg.auth}} </span><span> :  </span><span> {{msg.body}}</span> </div>
+        </li>
+    </ul>
+</div>
+
+Auth : <input ng-model="vm.newMsgAuth">
+
+Message :<input ng-model="vm.newMsg">
+<button ng-click="vm.addNewMsg()">Add a new Msg</button>
+
