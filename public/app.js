@@ -4,7 +4,7 @@
 (function () {
 	'use strict';
 
-	angular.module('DaPulseChat',[
+	angular.module('ChatApp',[
 		'ui.router'
 	]).config(function($stateProvider, $urlRouterProvider) {
 		//

@@ -5,7 +5,7 @@
 	'use strict';
 
 	angular
-		.module('DaPulseChat')
+		.module('ChatApp')
 		.controller('TeamCtrl', TeamCtrl);
 
 	TeamCtrl.$inject = ['teamsService','$stateParams'];

@@ -2,7 +2,7 @@
  * Created by avidan on 08-05-16.
  */
 (function () {
-	angular.module('DaPulseChat')
+	angular.module('ChatApp')
 		.factory('teamsService', TeamsServiceFactory)
 
 	TeamsServiceFactory.$inject = ['$http']

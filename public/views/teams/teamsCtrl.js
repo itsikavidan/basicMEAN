@@ -4,7 +4,7 @@
 (function () {
 	'use strict';
 	angular
-		.module('DaPulseChat')
+		.module('ChatApp')
 		.controller('TeamsCtrl', TeamsCtrl);
 
 	TeamsCtrl.$inject = ['teamsService'];
