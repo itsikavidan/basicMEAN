@@ -8,11 +8,12 @@
 		.module('ChatApp')
 		.controller('TeamCtrl', TeamCtrl);
 
-	TeamCtrl.$inject = ['teamsService','$stateParams'];
+	TeamCtrl.$inject = ['$scope','teamsService','$stateParams','$interval','$state'];
 
 	/* @ngInject */
-	function TeamCtrl(teamsService,$stateParams) {
+	function TeamCtrl($scope,teamsService,$stateParams,$interval,$state) {
 		var REFRESH_RATE = 5000;
+		var refreshPromise;
 
 		/* jshint validthis: true */
 		var vm = this;
@@ -21,39 +22,52 @@
 		vm.title = 'TeamCtrl';
 		vm.room
 		vm.msgCounter
-		vm.newMsgAuth = ''
-		vm.newMsg = ''
-		vm.addNewMsg  =function (){
+
+        vm.addNewMsg  =function (){
 			teamsService.addMessage(vm.room.id,vm.newMsg, vm.newMsgAuth).then(function (response){
 				refresh()
 			})
-			vm.newMsgAuth = ''
-			vm.newMsg = ''
+			initValues();
 
 		}
+
+        $scope.$on("$destroy", function() {
+            if (refreshPromise) {
+                $interval.cancel(refreshPromise);
+            }
+        });
 
 		activate();
 
 		////////////////
 
+        function initValues() {
+            vm.newMsgAuth = ''
+            vm.newMsg = ''
+        }
+
 		function activate() {
 			vm.room = {}
+            initValues();
 			teamsService.getRoom($stateParams.teamCode).then(function (response){
 				vm.room= response.data
 				vm.msgCounter = vm.room.msgCounter
 			}).catch(function (){
-				console.error('failed to get teams ')
+                let message = 'failed to get the rooms ';
+                console.error(message);
+				alert(message);
 				vm.room = {}
-			})
+                $state.go('teams');
+            })
 
-			setInterval(refresh, REFRESH_RATE)
+            refreshPromise = $interval(refresh, REFRESH_RATE)
 		}
 
 		function refresh (){
 			teamsService.getMessagesFromIndx(vm.room.id, vm.room.msgCounter).then(function (response){
-				vm.msgCounter = response.lastIndx
-				if(vm.rooms && vm.rooms.msgs) {
-					vm.room.msgs.concat(response.msgs)
+                vm.room.msgCounter = response.data.lastIndx
+				if(vm.room && vm.room.msgs) {
+                    vm.room.msgs = vm.room.msgs.concat(response.data.msgs)
 				}
 			})
 

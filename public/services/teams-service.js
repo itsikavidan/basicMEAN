@@ -36,7 +36,7 @@
 		}
 
 		function addMessage(roomId, msg, auth){
-			var url = ['rooms',roomId] .join('/')
+			var url = ['rooms',roomId,'messages'] .join('/')
 			return $http.post(url, {msg:msg, auth:auth})
 		}
 

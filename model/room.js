@@ -13,24 +13,31 @@ Room.prototype.setName = function (_name) {
 }
 
 Room.prototype.addMessage = function (_msg, _auth, clbk) {
-	if (!_msg) {
-		return clbk('invalid message')
+	if (!_msg || !_auth) {
+		return clbk('invalid message input')
 	}
 	var newMsg = {
 		body: _msg,
 		auth: _auth,
 		id: uuid.v4()
 	}
-	this.msgs.push(newMsg)
-	console.log('Added message')
+	this.msgs.push(newMsg);
+	console.log('Added message');
 	clbk(null, ++this.msgCounter)
 }
 
 Room.prototype.getMsgs = function (_from, _to, clbk) {
-	if (_from >= 0, _from < _to && _to > this.msgCounter){
-		return clbk('invalid msgs index ')
+	try {
+        if (_from >= 0, _from < _to && _to > this.msgCounter) {
+            return clbk('invalid msgs index ')
+        }
+        console.log(`bbb ${ {msgs: this.msgs.slice( _from, _to), lastIndx: this.msgCounter}}`);
+        clbk(null, {msgs: this.msgs.slice( _from, _to), lastIndx: this.msgCounter});
+    }
+    catch (e){
+		console.error(`failed to get messages: ${e.message} `);
+		clbk(`failed to get messages`);
 	}
-	clbk(null, {msgs:_.slice(this.msgs, _from, _to), lastIndx : this.msgCounter})
 }
 
 Room.prototype.getAllMsgs = function(clbk){
@@ -38,7 +45,11 @@ Room.prototype.getAllMsgs = function(clbk){
 }
 
 Room.prototype.getLastMsgs = function (indx, clbk){
-	return this.getMsgs(indx, this.msgCounter,clbk)
+	if (indx) {
+        return this.getMsgs(indx, this.msgCounter, clbk)
+    }else {
+		return this.getAllMsgs(clbk)
+	}
 }
 
 exports.createRoomInstance  = function(_name ){

@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('uefasentiment:server');
 var http = require('http');
+var socket = require('socket.io');
+var roomsService  = require('./../services/roomsService');
+
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +23,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+var io = socket(server);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -88,3 +92,9 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+roomsService.init();
+
+io.on('connection', function (socket){
+    socket.emit('news',{hello:'world'})
+})

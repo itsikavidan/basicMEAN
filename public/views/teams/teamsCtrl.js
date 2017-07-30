@@ -43,7 +43,9 @@
 			teamsService.getRooms().then(function (response) {
 				vm.rooms = response.data
 			}).catch(function () {
-				console.error('failed to get teams ')
+                let message = 'failed to get teams ';
+                console.error(message)
+				alert(message)
 				vm.teams = []
 			})
 		}

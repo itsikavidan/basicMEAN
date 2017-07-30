@@ -2,16 +2,23 @@
 
 
 <div>
-    <h4>messages  : </h4>
+    <h4>messages : </h4>
     <ul ng-repeat="msg in vm.room.msgs">
         <li>
-            <div><span> {{msg.auth}} </span><span> :  </span><span> {{msg.body}}</span> </div>
+            <div><span> {{msg.auth}} </span><span> :  </span><span> {{msg.body}}</span></div>
         </li>
     </ul>
 </div>
 
-Auth : <input ng-model="vm.newMsgAuth">
 
-Message :<input ng-model="vm.newMsg">
-<button ng-click="vm.addNewMsg()">Add a new Msg</button>
-
+<div style="margin-top: 50px; border-top: 1px solid black; padding-top: 10px">
+<form ng-submit="vm.addNewMsg()" >
+    <div style="float: left; margin-left: 5px;">
+        <span>Auth</span><span>:</span><input ng-model="vm.newMsgAuth">
+    </div>
+    <div style="float: left; margin-left: 5px;">
+        <span>Message</span><span>:</span><input ng-model="vm.newMsg">
+    </div>
+    <button style="float: left; margin-left: 5px;">Add a new Msg</button>
+</form>
+</div>

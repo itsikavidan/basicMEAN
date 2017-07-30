@@ -6,8 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var roomsRoute = require('./routes/room')
-var roomsService  =require('./services/roomsService')
+var roomsRoute = require('./routes/room');
+var roomsService  = require('./services/roomsService');
 
 var app = express();
 
@@ -58,6 +58,5 @@ app.use(function(err, req, res, next) {
 });
 
 
-roomsService.init()
 
 module.exports = app;

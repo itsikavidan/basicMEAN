@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="DaPulseChat">
+<html ng-app="ChatApp">
   <head>
     <title><%= title %></title>
     <meta charset="utf-8">
@@ -22,10 +22,10 @@
           <div class="cover-container">
                <div class="masthead clearfix">
                   <div class="inner">
-                      <h3 class="masthead-brand">DaPulse Chat !</h3>
+                      <h3 class="masthead-brand">Chat rooms!</h3>
                       <nav>
                           <ul class="nav masthead-nav">
-                            <!--<li role="presentation"> <a ui-sref="home">home</a></li>-->
+                            <li role="presentation"> <a ui-sref="home">home</a></li>
                             <li role="presentation"><a ui-sref="teams">rooms</a></li>
                           </ul>
                       </nav>
@@ -43,14 +43,15 @@
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/socket.io/"></script>
 
     <script src="app.js"></script>
     <script src="services/teams-service.js"></script>
-    <script src="services/prediction-service.js"></script>
+    <!--<script src="services/prediction-service.js"></script>-->
     <script src="views/home/homeCtrl.js"></script>
     <script src="views/team/teamCtrl.js"></script>
     <script src="views/teams/teamsCtrl.js"></script>
-    <script src="views/prediction/predictionCtrl.js"></script>
+    <!--<script src="views/prediction/predictionCtrl.js"></script>-->
 
   </body>
 </html>

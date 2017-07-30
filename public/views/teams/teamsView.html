@@ -1,13 +1,20 @@
 <h1>Rooms View</h1>
 
-<ul >
+<ul>
     <li ng-repeat="room in vm.rooms">
-        <a ui-sref="teamP({teamCode:room.id})" >{{room.name}}</a>
+        <a ui-sref="teamP({teamCode:room.id})">{{room.name}}</a>
     </li>
 
 </ul>
 
-<input ng-model="vm.newRoomName">
-<button ng-click="vm.createNewRoom()">Create a new Room</button>
+
+<div name="room" style="margin-top: 50px; border-top: 1px solid black; padding-top: 10px">
+    <form ng-submit="vm.createNewRoom()" >
+        <div style="float: left; margin-left: 5px;">
+            <input ng-model="vm.newRoomName">
+        </div>
+        <button style="float: left; margin-left: 5px;">Create a new Room</button>
+    </form>
+</div>
 
 <!--{{vm.rooms}}-->
